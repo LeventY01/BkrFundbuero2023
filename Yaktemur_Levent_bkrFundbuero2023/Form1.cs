@@ -16,6 +16,25 @@ namespace Yaktemur_Levent_bkrFundbuero2023
         private void Form1_Load(object sender, EventArgs e)
         {
             dbase = new Dbase(servername, database, uid, passwd);
+            Fill_Combobox();
+        }
+
+        private void Fill_Combobox()
+        {
+            List<string> listCombobox = new List<string>();
+            listCombobox = dbase.QueryToList("show tables;");
+            cBKatAuswahl.DataSource = listCombobox;
+        }
+
+        private void Fill_Daten()
+        {
+            dGVFundgegenstand.DataSource = dbase.TableToDataTable(cBKatAuswahl.Text);
+            lblCount.Text = dbase.QueryToCell($"SELECT COUNT(*) from {cBKatAuswahl.Text}");
+        }
+
+        private void cBKatAuswahl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Fill_Daten();
         }
     }
 }
