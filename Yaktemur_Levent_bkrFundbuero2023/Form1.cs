@@ -6,5 +6,10 @@ namespace Yaktemur_Levent_bkrFundbuero2023
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
