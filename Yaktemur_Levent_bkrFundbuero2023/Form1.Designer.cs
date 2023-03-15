@@ -148,6 +148,7 @@
             this.dGVFundgegenstand.RowTemplate.Height = 29;
             this.dGVFundgegenstand.Size = new System.Drawing.Size(662, 329);
             this.dGVFundgegenstand.TabIndex = 1;
+            this.dGVFundgegenstand.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGVFundgegenstand_CellContentClick);
             // 
             // panel1
             // 
