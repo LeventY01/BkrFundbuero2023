@@ -59,8 +59,11 @@
             this.lblPassword = new System.Windows.Forms.Label();
             this.tBUsername = new System.Windows.Forms.TextBox();
             this.tPVermittlung = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnAbmelden2 = new System.Windows.Forms.Button();
             this.tPStatistik = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnAbmelden = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tPFundgegenstand.SuspendLayout();
@@ -70,7 +73,10 @@
             this.tPVerlustmeldung.SuspendLayout();
             this.tPLogin.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.tPVermittlung.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.tPStatistik.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -366,6 +372,7 @@
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click_1);
             // 
             // lblUsername
             // 
@@ -397,12 +404,39 @@
             // 
             // tPVermittlung
             // 
+            this.tPVermittlung.Controls.Add(this.tableLayoutPanel4);
             this.tPVermittlung.Location = new System.Drawing.Point(4, 32);
             this.tPVermittlung.Name = "tPVermittlung";
             this.tPVermittlung.Size = new System.Drawing.Size(835, 374);
             this.tPVermittlung.TabIndex = 3;
             this.tPVermittlung.Text = "Vermittlung";
             this.tPVermittlung.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 87.90419F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.09581F));
+            this.tableLayoutPanel4.Controls.Add(this.btnAbmelden2, 1, 1);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.03743F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.96257F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(835, 374);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // btnAbmelden2
+            // 
+            this.btnAbmelden2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAbmelden2.Location = new System.Drawing.Point(737, 336);
+            this.btnAbmelden2.Name = "btnAbmelden2";
+            this.btnAbmelden2.Size = new System.Drawing.Size(95, 35);
+            this.btnAbmelden2.TabIndex = 1;
+            this.btnAbmelden2.Text = "Abmelden";
+            this.btnAbmelden2.UseVisualStyleBackColor = true;
+            this.btnAbmelden2.Click += new System.EventHandler(this.btnAbmelden_Click);
             // 
             // tPStatistik
             // 
@@ -417,16 +451,28 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85.02538F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.97462F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 87.78443F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.21557F));
+            this.tableLayoutPanel3.Controls.Add(this.btnAbmelden, 1, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.59416F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.40584F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.10695F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.893048F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(835, 374);
             this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // btnAbmelden
+            // 
+            this.btnAbmelden.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAbmelden.Location = new System.Drawing.Point(736, 340);
+            this.btnAbmelden.Name = "btnAbmelden";
+            this.btnAbmelden.Size = new System.Drawing.Size(96, 31);
+            this.btnAbmelden.TabIndex = 0;
+            this.btnAbmelden.Text = "Abmelden";
+            this.btnAbmelden.UseVisualStyleBackColor = true;
+            this.btnAbmelden.Click += new System.EventHandler(this.btnAbmelden_Click);
             // 
             // Form1
             // 
@@ -450,7 +496,10 @@
             this.tPLogin.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.tPVermittlung.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.tPStatistik.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -490,5 +539,8 @@
         private TextBox textBox1;
         private Label lblTelefon;
         private Label lblEmail;
+        private Button btnAbmelden;
+        private TableLayoutPanel tableLayoutPanel4;
+        private Button btnAbmelden2;
     }
 }
