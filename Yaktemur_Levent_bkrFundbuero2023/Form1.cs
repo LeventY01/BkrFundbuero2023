@@ -16,19 +16,19 @@ namespace Yaktemur_Levent_bkrFundbuero2023
             InitializeComponent();
             tabControl1.TabPages.Remove(tPVermittlung);
             tabControl1.TabPages.Remove(tPStatistik);
-            dbase = new Dbase(servername, database, uid, passwd);
-            Fill_Combobox();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            dbase = new Dbase(servername, database, uid, passwd);
+            Fill_Combobox();
         }
 
         private void Fill_Combobox()
         {
             List<string> listCombobox = new List<string>();
-            listCombobox = dbase.QueryToList("Show tables;");
+            listCombobox = dbase.QueryToList("Select bezeichnung from kategorie;");
             cBKatAuswahl.DataSource = listCombobox;
         }
 
@@ -37,10 +37,9 @@ namespace Yaktemur_Levent_bkrFundbuero2023
             dGVFundgegenstand.DataSource = dbase.TableToDataTable(cBKatAuswahl.Text);
             lblCount.Text = dbase.QueryToCell($"SELECT COUNT(*) from {cBKatAuswahl.Text}");
         }
-
         private void cBKatAuswahl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Fill_Daten();
+           
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -83,5 +82,6 @@ namespace Yaktemur_Levent_bkrFundbuero2023
                 tBPassword.Clear();
             }
         }
+        
     }
 }

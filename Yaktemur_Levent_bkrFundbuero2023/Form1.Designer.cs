@@ -168,6 +168,7 @@
             this.cBKatAuswahl.Name = "cBKatAuswahl";
             this.cBKatAuswahl.Size = new System.Drawing.Size(151, 28);
             this.cBKatAuswahl.TabIndex = 3;
+            this.cBKatAuswahl.SelectedIndexChanged += new System.EventHandler(this.cBKatAuswahl_SelectedIndexChanged);
             // 
             // lblKategorie1
             // 
