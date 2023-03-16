@@ -52,21 +52,24 @@ namespace Yaktemur_Levent_bkrFundbuero2023
         private void Fill_Daten()
         {
             dGVFundgegenstand.Rows.Clear();
-            dGVFundgegenstand.ColumnCount = 2;
+            dGVFundgegenstand.ColumnCount = 3;
             dGVFundgegenstand.Columns[0].Name = "Beschreibung";
             dGVFundgegenstand.Columns[1].Name = "Funddatum";
-            List<string[]> listData = dbase.QueryToArrayList($"""
-                SELECT Beschreibung, DATE_FORMAT(Funddatum, '%d.%m.%Y') as Funddatum 
-                FROM fundgegenstand
-                WHERE KatID = '{cBKatAuswahl.SelectedIndex + 1}';
+            dGVFundgegenstand.Columns[2].Name = "Fundort";
 
-                """);
+            List<string[]> listData = dbase.QueryToArrayList($@"
+            SELECT fg.Beschreibung, DATE_FORMAT(fg.Funddatum, '%d.%m.%Y') as Funddatum, fo.Bezeichnung as Fundort 
+            FROM fundgegenstand fg
+          JOIN fundort fo ON fg.FundortID = fo.FundortID
+        WHERE fg.KatID = '{cBKatAuswahl.SelectedIndex + 1}';
+    ");
+
             foreach (string[] item in listData)
             {
                 dGVFundgegenstand.Rows.Add(item);
             }
-            lblCount.Text = dbase.QueryToCell($"SELECT COUNT(*) FROM fundgegenstand" +
-                $" WHERE KatID = '{cBKatAuswahl.SelectedIndex + 1}';");
+
+            lblCount.Text = dbase.QueryToCell($"SELECT COUNT(*) FROM fundgegenstand WHERE KatID = '{cBKatAuswahl.SelectedIndex + 1}';");
         }
 
 
@@ -144,12 +147,12 @@ namespace Yaktemur_Levent_bkrFundbuero2023
 
             string fundortID = dbase.QueryToCell($"SELECT FundortID FROM fundort WHERE Bezeichnung = '{fundort}'");
 
+
             dbase.QueryToList($"INSERT INTO verlustmeldung (Beschreibung, VerlustOrt, Verlustdatum, Telefonnummer, EMail, EigentumNr) " +
        $"VALUES ('{beschreibung}', '{fundortID}', '{verlustdatum:yyyy-MM-dd}', '{telefonnummer}', '{email}', '{eigentumNr}');");
 
+
             MessageBox.Show("Erfolgreich Aufgegeben!");
-
-
             textBox3.Clear();
             comboBox3.SelectedIndex = -1;
             dTPDatum.Value = DateTime.Now;
