@@ -38,6 +38,7 @@
             lblKategorie1 = new Label();
             lblCount = new Label();
             tPVerlustmeldung = new TabPage();
+            checkBox1 = new CheckBox();
             textBox3 = new TextBox();
             textBox2 = new TextBox();
             textBox1 = new TextBox();
@@ -64,7 +65,6 @@
             tPStatistik = new TabPage();
             tableLayoutPanel3 = new TableLayoutPanel();
             btnAbmelden = new Button();
-            checkBox1 = new CheckBox();
             tableLayoutPanel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tPFundgegenstand.SuspendLayout();
@@ -214,6 +214,17 @@
             tPVerlustmeldung.TabIndex = 1;
             tPVerlustmeldung.Text = "Verlustmeldung";
             tPVerlustmeldung.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(630, 90);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(86, 24);
+            checkBox1.TabIndex = 17;
+            checkBox1.Text = "Anonym";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // textBox3
             // 
@@ -468,17 +479,6 @@
             btnAbmelden.Text = "Abmelden";
             btnAbmelden.UseVisualStyleBackColor = true;
             btnAbmelden.Click += btnAbmelden_Click;
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(630, 90);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(86, 24);
-            checkBox1.TabIndex = 17;
-            checkBox1.Text = "Anonym";
-            checkBox1.UseVisualStyleBackColor = true;
-            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // Form1
             // 
