@@ -60,8 +60,8 @@ namespace Yaktemur_Levent_bkrFundbuero2023
             List<string[]> listData = dbase.QueryToArrayList($@"
             SELECT fg.Beschreibung, DATE_FORMAT(fg.Funddatum, '%d.%m.%Y') as Funddatum, fo.Bezeichnung as Fundort 
             FROM fundgegenstand fg
-          JOIN fundort fo ON fg.FundortID = fo.FundortID
-        WHERE fg.KatID = '{cBKatAuswahl.SelectedIndex + 1}';
+            JOIN fundort fo ON fg.FundortID = fo.FundortID
+            WHERE fg.KatID = '{cBKatAuswahl.SelectedIndex + 1}';
     ");
 
             foreach (string[] item in listData)
@@ -159,6 +159,11 @@ namespace Yaktemur_Levent_bkrFundbuero2023
             tBFundgegenstand.Clear();
             textBox2.Clear();
             textBox1.Clear();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

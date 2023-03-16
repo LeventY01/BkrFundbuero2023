@@ -64,6 +64,7 @@
             tPStatistik = new TabPage();
             tableLayoutPanel3 = new TableLayoutPanel();
             btnAbmelden = new Button();
+            checkBox1 = new CheckBox();
             tableLayoutPanel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tPFundgegenstand.SuspendLayout();
@@ -192,6 +193,7 @@
             // 
             // tPVerlustmeldung
             // 
+            tPVerlustmeldung.Controls.Add(checkBox1);
             tPVerlustmeldung.Controls.Add(textBox3);
             tPVerlustmeldung.Controls.Add(textBox2);
             tPVerlustmeldung.Controls.Add(textBox1);
@@ -269,14 +271,14 @@
             // 
             // dTPDatum
             // 
-            dTPDatum.Location = new Point(370, 51);
+            dTPDatum.Location = new Point(370, 53);
             dTPDatum.Name = "dTPDatum";
             dTPDatum.Size = new Size(250, 27);
             dTPDatum.TabIndex = 10;
             // 
             // tBFundgegenstand
             // 
-            tBFundgegenstand.Location = new Point(630, 51);
+            tBFundgegenstand.Location = new Point(626, 53);
             tBFundgegenstand.Name = "tBFundgegenstand";
             tBFundgegenstand.Size = new Size(185, 27);
             tBFundgegenstand.TabIndex = 9;
@@ -467,6 +469,17 @@
             btnAbmelden.UseVisualStyleBackColor = true;
             btnAbmelden.Click += btnAbmelden_Click;
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(630, 90);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(86, 24);
+            checkBox1.TabIndex = 17;
+            checkBox1.Text = "Anonym";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -534,5 +547,6 @@
         private TableLayoutPanel tableLayoutPanel4;
         private Button btnAbmelden2;
         private TextBox textBox3;
+        private CheckBox checkBox1;
     }
 }
