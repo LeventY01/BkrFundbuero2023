@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
+
 namespace Yaktemur_Levent_bkrFundbuero2023
 {
     public partial class Form1 : Form
@@ -16,30 +17,63 @@ namespace Yaktemur_Levent_bkrFundbuero2023
             InitializeComponent();
             tabControl1.TabPages.Remove(tPVermittlung);
             tabControl1.TabPages.Remove(tPStatistik);
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             dbase = new Dbase(servername, database, uid, passwd);
+
             Fill_Combobox();
+            FillFundortComboBox();
+
+
         }
 
         private void Fill_Combobox()
         {
-            List<string> listCombobox = new List<string>();
-            listCombobox = dbase.QueryToList("Select bezeichnung from kategorie;");
-            cBKatAuswahl.DataSource = listCombobox;
+            cBKatAuswahl.Items.Clear();
+            List<string> listData = dbase.QueryToList("SELECT Bezeichnung FROM kategorie;");
+            foreach (string item in listData)
+            {
+                cBKatAuswahl.Items.Add(item);
+            }
+
+            // fill the comboBox3 with fundort data
+            comboBox3.Items.Clear();
+            listData = dbase.QueryToList("SELECT Bezeichnung FROM fundort;");
+            foreach (string item in listData)
+            {
+                comboBox3.Items.Add(item);
+            }
+
         }
 
         private void Fill_Daten()
         {
-            dGVFundgegenstand.DataSource = dbase.TableToDataTable(cBKatAuswahl.Text);
-            lblCount.Text = dbase.QueryToCell($"SELECT COUNT(*) from {cBKatAuswahl.Text}");
+            dGVFundgegenstand.Rows.Clear();
+            dGVFundgegenstand.ColumnCount = 2;
+            dGVFundgegenstand.Columns[0].Name = "Beschreibung";
+            dGVFundgegenstand.Columns[1].Name = "Funddatum";
+            List<string[]> listData = dbase.QueryToArrayList($"""
+                SELECT Beschreibung, DATE_FORMAT(Funddatum, '%d.%m.%Y') as Funddatum 
+                FROM fundgegenstand
+                WHERE KatID = '{cBKatAuswahl.SelectedIndex + 1}';
+
+                """);
+            foreach (string[] item in listData)
+            {
+                dGVFundgegenstand.Rows.Add(item);
+            }
+            lblCount.Text = dbase.QueryToCell($"SELECT COUNT(*) FROM fundgegenstand" +
+                $" WHERE KatID = '{cBKatAuswahl.SelectedIndex + 1}';");
         }
+
+
+
         private void cBKatAuswahl_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+            Fill_Daten();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -82,6 +116,46 @@ namespace Yaktemur_Levent_bkrFundbuero2023
                 tBPassword.Clear();
             }
         }
-        
+
+        private void dGVFundgegenstand_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+
+        private void FillFundortComboBox()
+        {
+            comboBox3.Items.Clear();
+            List<string> fundortList = dbase.QueryToList("SELECT Bezeichnung FROM fundort");
+            foreach (string fundort in fundortList)
+            {
+                comboBox3.Items.Add(fundort);
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string beschreibung = textBox3.Text;
+            string fundort = comboBox3.SelectedItem.ToString();
+            DateTime verlustdatum = dTPDatum.Value;
+            string telefonnummer = textBox2.Text;
+            string email = textBox1.Text;
+            string eigentumNr = tBFundgegenstand.Text;
+
+
+            string fundortID = dbase.QueryToCell($"SELECT FundortID FROM fundort WHERE Bezeichnung = '{fundort}'");
+
+            dbase.QueryToList($"INSERT INTO verlustmeldung (Beschreibung, VerlustOrt, Verlustdatum, Telefonnummer, EMail, EigentumNr) " +
+       $"VALUES ('{beschreibung}', '{fundortID}', '{verlustdatum:yyyy-MM-dd}', '{telefonnummer}', '{email}', '{eigentumNr}');");
+
+            MessageBox.Show("Erfolgreich Aufgegeben!");
+
+
+            textBox3.Clear();
+            comboBox3.SelectedIndex = -1;
+            dTPDatum.Value = DateTime.Now;
+            tBFundgegenstand.Clear();
+            textBox2.Clear();
+            textBox1.Clear();
+        }
     }
 }
