@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             tableLayoutPanel1 = new TableLayoutPanel();
             tabControl1 = new TabControl();
             tPFundgegenstand = new TabPage();
@@ -65,6 +68,12 @@
             tPStatistik = new TabPage();
             tableLayoutPanel3 = new TableLayoutPanel();
             btnAbmelden = new Button();
+            cStatistik = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            panel3 = new Panel();
+            btnVerloren = new Button();
+            btnGefunden = new Button();
+            cBJahr = new ComboBox();
+            lblJahr = new Label();
             tableLayoutPanel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tPFundgegenstand.SuspendLayout();
@@ -78,13 +87,15 @@
             tableLayoutPanel4.SuspendLayout();
             tPStatistik.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)cStatistik).BeginInit();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 94.24207F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5.757932F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 95.67148F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 4.32852364F));
             tableLayoutPanel1.Controls.Add(tabControl1, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
@@ -107,7 +118,7 @@
             tabControl1.Location = new Point(3, 3);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(843, 410);
+            tabControl1.Size = new Size(856, 410);
             tabControl1.SizeMode = TabSizeMode.FillToRight;
             tabControl1.TabIndex = 0;
             // 
@@ -117,7 +128,7 @@
             tPFundgegenstand.Location = new Point(4, 32);
             tPFundgegenstand.Name = "tPFundgegenstand";
             tPFundgegenstand.Padding = new Padding(3);
-            tPFundgegenstand.Size = new Size(835, 374);
+            tPFundgegenstand.Size = new Size(848, 374);
             tPFundgegenstand.TabIndex = 0;
             tPFundgegenstand.Text = "Fundgegenstände";
             tPFundgegenstand.UseVisualStyleBackColor = true;
@@ -136,7 +147,7 @@
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 91.03261F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 8.967391F));
-            tableLayoutPanel2.Size = new Size(829, 368);
+            tableLayoutPanel2.Size = new Size(842, 368);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // dGVFundgegenstand
@@ -147,7 +158,7 @@
             dGVFundgegenstand.Name = "dGVFundgegenstand";
             dGVFundgegenstand.RowHeadersWidth = 51;
             dGVFundgegenstand.RowTemplate.Height = 29;
-            dGVFundgegenstand.Size = new Size(662, 329);
+            dGVFundgegenstand.Size = new Size(672, 329);
             dGVFundgegenstand.TabIndex = 1;
             dGVFundgegenstand.CellContentClick += dGVFundgegenstand_CellContentClick;
             // 
@@ -156,18 +167,18 @@
             panel1.Controls.Add(cBKatAuswahl);
             panel1.Controls.Add(lblKategorie1);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(671, 3);
+            panel1.Location = new Point(681, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(155, 329);
+            panel1.Size = new Size(158, 329);
             panel1.TabIndex = 3;
             // 
             // cBKatAuswahl
             // 
             cBKatAuswahl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             cBKatAuswahl.FormattingEnabled = true;
-            cBKatAuswahl.Location = new Point(0, 23);
+            cBKatAuswahl.Location = new Point(3, 23);
             cBKatAuswahl.Name = "cBKatAuswahl";
-            cBKatAuswahl.Size = new Size(151, 28);
+            cBKatAuswahl.Size = new Size(149, 28);
             cBKatAuswahl.TabIndex = 3;
             cBKatAuswahl.SelectedIndexChanged += cBKatAuswahl_SelectedIndexChanged;
             // 
@@ -185,7 +196,7 @@
             // 
             lblCount.Anchor = AnchorStyles.None;
             lblCount.AutoSize = true;
-            lblCount.Location = new Point(310, 341);
+            lblCount.Location = new Point(315, 341);
             lblCount.Name = "lblCount";
             lblCount.Size = new Size(48, 20);
             lblCount.TabIndex = 4;
@@ -210,7 +221,7 @@
             tPVerlustmeldung.Location = new Point(4, 32);
             tPVerlustmeldung.Name = "tPVerlustmeldung";
             tPVerlustmeldung.Padding = new Padding(3);
-            tPVerlustmeldung.Size = new Size(835, 374);
+            tPVerlustmeldung.Size = new Size(848, 374);
             tPVerlustmeldung.TabIndex = 1;
             tPVerlustmeldung.Text = "Verlustmeldung";
             tPVerlustmeldung.UseVisualStyleBackColor = true;
@@ -343,7 +354,7 @@
             tPLogin.Controls.Add(panel2);
             tPLogin.Location = new Point(4, 32);
             tPLogin.Name = "tPLogin";
-            tPLogin.Size = new Size(835, 374);
+            tPLogin.Size = new Size(848, 374);
             tPLogin.TabIndex = 2;
             tPLogin.Text = "Admin login";
             tPLogin.UseVisualStyleBackColor = true;
@@ -413,7 +424,7 @@
             tPVermittlung.Controls.Add(tableLayoutPanel4);
             tPVermittlung.Location = new Point(4, 32);
             tPVermittlung.Name = "tPVermittlung";
-            tPVermittlung.Size = new Size(835, 374);
+            tPVermittlung.Size = new Size(848, 374);
             tPVermittlung.TabIndex = 3;
             tPVermittlung.Text = "Vermittlung";
             tPVermittlung.UseVisualStyleBackColor = true;
@@ -430,15 +441,15 @@
             tableLayoutPanel4.RowCount = 2;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 89.03743F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 10.96257F));
-            tableLayoutPanel4.Size = new Size(835, 374);
+            tableLayoutPanel4.Size = new Size(848, 374);
             tableLayoutPanel4.TabIndex = 0;
             // 
             // btnAbmelden2
             // 
             btnAbmelden2.Dock = DockStyle.Fill;
-            btnAbmelden2.Location = new Point(737, 336);
+            btnAbmelden2.Location = new Point(748, 336);
             btnAbmelden2.Name = "btnAbmelden2";
-            btnAbmelden2.Size = new Size(95, 35);
+            btnAbmelden2.Size = new Size(97, 35);
             btnAbmelden2.TabIndex = 1;
             btnAbmelden2.Text = "Abmelden";
             btnAbmelden2.UseVisualStyleBackColor = true;
@@ -449,7 +460,7 @@
             tPStatistik.Controls.Add(tableLayoutPanel3);
             tPStatistik.Location = new Point(4, 32);
             tPStatistik.Name = "tPStatistik";
-            tPStatistik.Size = new Size(835, 374);
+            tPStatistik.Size = new Size(848, 374);
             tPStatistik.TabIndex = 4;
             tPStatistik.Text = "Statistik";
             tPStatistik.UseVisualStyleBackColor = true;
@@ -457,28 +468,100 @@
             // tableLayoutPanel3
             // 
             tableLayoutPanel3.ColumnCount = 2;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 87.78443F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.21557F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 86.320755F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 13.679245F));
             tableLayoutPanel3.Controls.Add(btnAbmelden, 1, 1);
+            tableLayoutPanel3.Controls.Add(cStatistik, 0, 0);
+            tableLayoutPanel3.Controls.Add(panel3, 1, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(0, 0);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 90.10695F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 9.893048F));
-            tableLayoutPanel3.Size = new Size(835, 374);
+            tableLayoutPanel3.Size = new Size(848, 374);
             tableLayoutPanel3.TabIndex = 0;
             // 
             // btnAbmelden
             // 
             btnAbmelden.Dock = DockStyle.Fill;
-            btnAbmelden.Location = new Point(736, 340);
+            btnAbmelden.Location = new Point(735, 340);
             btnAbmelden.Name = "btnAbmelden";
-            btnAbmelden.Size = new Size(96, 31);
+            btnAbmelden.Size = new Size(110, 31);
             btnAbmelden.TabIndex = 0;
             btnAbmelden.Text = "Abmelden";
             btnAbmelden.UseVisualStyleBackColor = true;
             btnAbmelden.Click += btnAbmelden_Click;
+            // 
+            // cStatistik
+            // 
+            chartArea1.Name = "ChartArea1";
+            cStatistik.ChartAreas.Add(chartArea1);
+            cStatistik.Dock = DockStyle.Fill;
+            legend1.Name = "Legend1";
+            cStatistik.Legends.Add(legend1);
+            cStatistik.Location = new Point(3, 3);
+            cStatistik.Name = "cStatistik";
+            cStatistik.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            cStatistik.Series.Add(series1);
+            cStatistik.Size = new Size(726, 331);
+            cStatistik.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(btnVerloren);
+            panel3.Controls.Add(btnGefunden);
+            panel3.Controls.Add(cBJahr);
+            panel3.Controls.Add(lblJahr);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(735, 3);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(110, 331);
+            panel3.TabIndex = 2;
+            // 
+            // btnVerloren
+            // 
+            btnVerloren.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnVerloren.Location = new Point(3, 103);
+            btnVerloren.Name = "btnVerloren";
+            btnVerloren.Size = new Size(104, 29);
+            btnVerloren.TabIndex = 3;
+            btnVerloren.Text = "Verloren";
+            btnVerloren.UseVisualStyleBackColor = true;
+            // 
+            // btnGefunden
+            // 
+            btnGefunden.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnGefunden.Location = new Point(3, 68);
+            btnGefunden.Name = "btnGefunden";
+            btnGefunden.Size = new Size(104, 29);
+            btnGefunden.TabIndex = 2;
+            btnGefunden.Text = "Gefunden";
+            btnGefunden.UseVisualStyleBackColor = true;
+            btnGefunden.Click += btnGefunden_Click;
+            // 
+            // cBJahr
+            // 
+            cBJahr.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            cBJahr.FormattingEnabled = true;
+            cBJahr.Location = new Point(3, 23);
+            cBJahr.Name = "cBJahr";
+            cBJahr.Size = new Size(104, 28);
+            cBJahr.TabIndex = 1;
+            // 
+            // lblJahr
+            // 
+            lblJahr.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblJahr.AutoSize = true;
+            lblJahr.Location = new Point(3, 0);
+            lblJahr.Name = "lblJahr";
+            lblJahr.Size = new Size(38, 20);
+            lblJahr.TabIndex = 0;
+            lblJahr.Text = "Jahr:";
             // 
             // Form1
             // 
@@ -506,6 +589,9 @@
             tableLayoutPanel4.ResumeLayout(false);
             tPStatistik.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)cStatistik).EndInit();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -548,5 +634,11 @@
         private Button btnAbmelden2;
         private TextBox textBox3;
         private CheckBox checkBox1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart cStatistik;
+        private Panel panel3;
+        private ComboBox cBJahr;
+        private Label lblJahr;
+        private Button btnVerloren;
+        private Button btnGefunden;
     }
 }

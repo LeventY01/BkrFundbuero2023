@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 
 namespace Yaktemur_Levent_bkrFundbuero2023
@@ -25,7 +26,6 @@ namespace Yaktemur_Levent_bkrFundbuero2023
             dbase = new Dbase(servername, database, uid, passwd);
 
             Fill_Combobox();
-            FillFundortComboBox();
 
 
 
@@ -33,20 +33,16 @@ namespace Yaktemur_Levent_bkrFundbuero2023
 
         private void Fill_Combobox()
         {
-            cBKatAuswahl.Items.Clear();
             List<string> listData = dbase.QueryToList("SELECT Bezeichnung FROM kategorie;");
-            foreach (string item in listData)
-            {
-                cBKatAuswahl.Items.Add(item);
-            }
+            cBKatAuswahl.DataSource = listData;
 
             // fill the comboBox3 with fundort data
             comboBox3.Items.Clear();
             listData = dbase.QueryToList("SELECT Bezeichnung FROM fundort;");
-            foreach (string item in listData)
-            {
-                comboBox3.Items.Add(item);
-            }
+            comboBox3.DataSource = listData;
+
+            listData = dbase.QueryToList("SELECT YEAR(Funddatum) AS Jahr, COUNT(*) AS Anzahl_gefundene_Gegenstände FROM fundgegenstand GROUP BY YEAR(Funddatum);");
+            cBJahr.DataSource = listData;
 
         }
 
@@ -127,15 +123,6 @@ namespace Yaktemur_Levent_bkrFundbuero2023
         }
 
 
-        private void FillFundortComboBox()
-        {
-            comboBox3.Items.Clear();
-            List<string> fundortList = dbase.QueryToList("SELECT Bezeichnung FROM fundort");
-            foreach (string fundort in fundortList)
-            {
-                comboBox3.Items.Add(fundort);
-            }
-        }
         private void button1_Click(object sender, EventArgs e)
         {
             string beschreibung = textBox3.Text;
@@ -165,6 +152,21 @@ namespace Yaktemur_Levent_bkrFundbuero2023
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnGefunden_Click(object sender, EventArgs e)
+        {
+            List<String[]> liste = new List<String[]>();
+            liste = dbase.QueryToArrayList($"SELECT {cBJahr.Text} AS Jahr AS Anzahl_gefundene_Gegenstände FROM fundgegenstand;");
+
+            string[] jahr = cBJahr.Text.Split('_');
+            string first = jahr[0];
+
+            var s = cStatistik.Series.Add($"Jahr-{cBJahr.Text}");
+            for (int i = 0; i < liste.Count; i++)
+            {
+                s.Points.AddXY(liste[i][0], liste[i][1]);
+            }
         }
     }
 }
