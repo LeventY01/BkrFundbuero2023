@@ -154,25 +154,5 @@ namespace Yaktemur_Levent_bkrFundbuero2023
                 return false;
             }
         }
-
-        public DataTable TableToDataTable2(string table)
-        {
-            DataTable dtData = new DataTable();
-            string query = $"SELECT {table} FROM kategorie";
-            try
-            {
-                connection.Open();
-                MySqlDataAdapter adp = new MySqlDataAdapter(query, connection);
-                adp.Fill(dtData);
-                connection.Close();
-                return dtData;
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message, "Datenbank Query-Fehler");
-                return new DataTable();
-            }
-        }
-
     }
 }
