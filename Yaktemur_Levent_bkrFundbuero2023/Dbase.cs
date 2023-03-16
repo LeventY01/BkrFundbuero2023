@@ -29,6 +29,7 @@ namespace Yaktemur_Levent_bkrFundbuero2023
             Connect();
         }
 
+
         public void Connect()
         {
             connString = $"SERVER={serverName};DATABASE={databaseName};UID={uid};PWD={passwd}";
@@ -40,9 +41,10 @@ namespace Yaktemur_Levent_bkrFundbuero2023
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message, "Datenbank Verbindungsfehler");        
+                MessageBox.Show(ex.Message, "Datenbank Verbindungsfehler");
             }
-        }
+        
+    }
         public DataTable TableToDataTable(string table)
         {
             DataTable dtData = new DataTable();
