@@ -1,7 +1,5 @@
-using System.Data;
 using System.Security.Cryptography;
 using System.Text;
-
 
 namespace Yaktemur_Levent_bkrFundbuero2023
 {
@@ -24,43 +22,24 @@ namespace Yaktemur_Levent_bkrFundbuero2023
         private void Form1_Load(object sender, EventArgs e)
         {
             dbase = new Dbase(servername, database, uid, passwd);
-
             Fill_Combobox();
-
-            
         }
-
-
 
         private void Fill_Combobox()
         {
-            cBKatAuswahl.Items.Clear();
-            List<string> listData = dbase.QueryToList("SELECT Bezeichnung FROM kategorie;");
-            foreach (string item in listData)
-            {
-                cBKatAuswahl.Items.Add(item);
-            }
+            List<string> listCombobox = new List<string>();
+            listCombobox = dbase.QueryToList("Select bezeichnung from kategorie;");
+            cBKatAuswahl.DataSource = listCombobox;
         }
 
         private void Fill_Daten()
         {
-            dGVFundgegenstand.Rows.Clear();
-            dGVFundgegenstand.ColumnCount = 2;
-            dGVFundgegenstand.Columns[0].Name = "Beschreibung";
-            dGVFundgegenstand.Columns[1].Name = "Funddatum";
-            List<string[]> listData = dbase.QueryToArrayList($"SELECT Beschreibung, DATE_FORMAT(Funddatum, '%d.%m.%Y') as Funddatum FROM fundgegenstand WHERE KatID = '{cBKatAuswahl.SelectedIndex + 1}';");
-            foreach (string[] item in listData)
-            {
-                dGVFundgegenstand.Rows.Add(item);
-            }
-            lblCount.Text = dbase.QueryToCell($"SELECT COUNT(*) FROM fundgegenstand WHERE KatID = '{cBKatAuswahl.SelectedIndex + 1}';");
+            dGVFundgegenstand.DataSource = dbase.TableToDataTable(cBKatAuswahl.Text);
+            lblCount.Text = dbase.QueryToCell($"SELECT COUNT(*) from {cBKatAuswahl.Text}");
         }
-
-
-    
         private void cBKatAuswahl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Fill_Daten();
+           
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -103,10 +82,6 @@ namespace Yaktemur_Levent_bkrFundbuero2023
                 tBPassword.Clear();
             }
         }
-
-        private void dGVFundgegenstand_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
     }
 }
