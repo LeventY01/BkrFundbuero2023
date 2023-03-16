@@ -28,6 +28,7 @@ namespace Yaktemur_Levent_bkrFundbuero2023
             FillFundortComboBox();
 
 
+
         }
 
         private void Fill_Combobox()
@@ -55,7 +56,7 @@ namespace Yaktemur_Levent_bkrFundbuero2023
             dGVFundgegenstand.ColumnCount = 3;
             dGVFundgegenstand.Columns[0].Name = "Beschreibung";
             dGVFundgegenstand.Columns[1].Name = "Funddatum";
-            dGVFundgegenstand.Columns[2].Name = "Fundort";
+            dGVFundgegenstand.Columns[2].Name = "Fundrt";
 
             List<string[]> listData = dbase.QueryToArrayList($@"
             SELECT fg.Beschreibung, DATE_FORMAT(fg.Funddatum, '%d.%m.%Y') as Funddatum, fo.Bezeichnung as Fundort 
